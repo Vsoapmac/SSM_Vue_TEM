@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+</head>
+<script src="js/vue.js"></script>
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<body>
+<div>
+    <h1>Vue的定义和传值</h1>
+</div>
+<div>
+    <h1>------------------------------------------</h1>
+</div>
+<div id="vue_first">
+    <h2>site : {{site}}</h2>
+    <h2>url : {{url}}</h2>
+    <h2>{{details()}}</h2>
+</div>
+<script type="application/javascript">
+    new Vue({
+        el: '#vue_first',
+        data: {
+            site: 'Vsoapmac',
+            url: 'www.Vue.js.cn'
+        }, methods: {
+            details: function () {
+                return this.site + " " + "first Vue app";
+            }
+        }
+    })
+</script>
+<div>
+    <h1>------------------------------------------</h1>
+</div>
+<div>
+    <h1>Vue的事件处理</h1>
+</div>
+<div>
+    <h1>------------------------------------------</h1>
+</div>
+<div id="vue_alert">
+    <h2>当前计数{{counter}}</h2>
+    <button v-on:click="counter++">+</button>
+    <button v-on:click="counter--">-</button>
+    <button v-on:click="add">+</button>
+    <button v-on:click="sub">-</button>
+</div>
+<script>
+    new Vue({
+        el: '#vue_alert',
+        data: {
+            counter: 0
+        }, methods: {
+            add: function () {
+                console.log('add被调用');
+                this.counter++
+            },
+            sub: function () {
+                console.log('sub被调用');
+                this.counter--
+            }
+        }
+    })
+</script>
+
+<div>
+    <h1>------------------------------------------</h1>
+</div>
+<div>
+    <h1>Vue的循环</h1>
+</div>
+<div>
+    <h1>------------------------------------------</h1>
+</div>
+<div id="vueArray">
+    <ul>
+        <li v-for="(item, index) in arr">{{item}}=={{index}}</li>
+    </ul>
+</div>
+<script>
+    new Vue({
+        el: "#vueArray",
+        data: {
+            arr: [1, 2, 3, 4, 5]
+        }
+    })
+</script>
+
+<div id="VueProduct">
+    <ul v-for="(product,index) in product">
+        <li>{{index}}</li>
+        <li>{{product.id}}</li>
+        <li>{{product.name}}</li>
+    </ul>
+</div>
+<script>
+    new Vue({
+        el: "#VueProduct",
+        data: {
+            product: [
+                {id: 1, name: "笔记本电脑", price: 5000},
+                {id: 2, name: "笔记本电脑", price: 4000},
+                {id: 3, name: "笔记本电脑", price: 3000}
+            ]
+        }
+    })
+</script>
+
+<div>
+    <h1>------------------------------------------</h1>
+</div>
+<div>
+    <h1>axios AJAX</h1>
+</div>
+<div>
+    <h1>------------------------------------------</h1>
+</div>
+
+<div >
+    <form id="axios" method="post">
+        <input type="submit">
+    </form>
+    <h2>{{success}}</h2>
+</div>
+<script>
+    new Vue({
+        el: '#axios',
+        data() {
+            return {
+                success: 1
+            }
+        },
+        mounted() {
+            axios
+                .post('http://localhost:8080/json', {
+                    id: '1',        // 参数 firstName
+                })
+                .then(response => (this.info = response))
+                .catch(function (error) { // 请求失败处理
+                    console.log(error);
+                });
+        }
+    })
+</script>
+
+</body>
+</html>
